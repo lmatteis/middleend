@@ -7,7 +7,8 @@
 <link href="stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 <script>
-var ontologyname = "{{ontologyname}}";
+var ontologyname = "";
+var ontologyid = "<?php echo $ontologyid; ?>";
 var searchQuery = "{{searchQuery}}";
 </script>
 <script type="text/javascript" src="js/main.js"></script>
@@ -209,7 +210,7 @@ var searchQuery = "{{searchQuery}}";
     <div class="toolbar_edit"></div>
     <div class="toolbar_remove"></div>
 </div>
-<iframe name="upload_iframe" src="/add-attribute" style="display: none;"></iframe>
+<!--<iframe name="upload_iframe" src="/add-attribute" style="display: none;"></iframe>-->
 
  
 <!--[if IE 8]>

@@ -426,8 +426,7 @@ function load_branch(parent, url) {
  
     parent.show();
  
-    $.get("/httpget", {url: url}, function(xml) {
-        // hide the loading image
+    $.get("index.php/"+url, function(json) {
         var jxml = $(xml);
 
         var items = jxml.find("item");
@@ -836,13 +835,33 @@ var events = function(){
     });
  
 };
+
+function loadOntos() {
+
+    var parent = $(".cont");
+    loader(parent, true);
+    $.getJSON("index.php/get-ontologies",  function(json) {
+        var arr = json._response;
+        $.each(arr, function(i) {
+            var onto_name = this[":NAME"][0][":DATA"];
+            var onto_id = this[":GID"];
+
+            parent.append('<p><a class="minibutton btn-watch" title="undefined" href="index.php/ontology/'+onto_id+'"><span>'+onto_name+'</span></a></p>');
+            
+            loader(parent, false);
+        });
+
+    });
+}
  
 $(document).ready(function(){
  
-    Login();
-    /* load initial root branch - left-side */
+    //Login();
+
     //load_branch($("#root"), "http://cropontology.org/ontology-lookup/direct.view?q=ontologyfilter");
-    if(ontologyname != "{{ontologyname}}") {
+    if(ontologyid == "") { // load homepage all ontologies
+        loadOntos();
+    } else if(ontologyname != "{{ontologyname}}") {
         load_branch($("#root"), "http://cropontology.org/ontology-lookup/tree.view?q=treebuilder&ontologyname="+ontologyname);
     } else if(searchQuery != "") {
         do_search();
