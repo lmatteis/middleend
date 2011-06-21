@@ -6,7 +6,7 @@ require_once 'toro.php';
  */
 class UiHandler extends ToroHandler {
     public function get() { 
-        echo 'Hello, world';
+        echo file_get_contents('ui.html');
     }
 }
 
